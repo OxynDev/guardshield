@@ -10,6 +10,31 @@ pip install excersec
 ```
 
 
+## Usage
+
+Import 
+```python
+import excersec```
+
+Anti debugger detection loop
+```python
+# Custom own function
+def debbuger_detected():
+    print("skid")
+
+# threaded loop
+module = excersec.Security(
+    anti_debugger=True, # Debbuger detection
+    kill_on_debug=True, # Kill app on detection
+    custom_function_on_detection=debbuger_detected # Called function on detection
+    )
+module.check_security()
+```
+
+
+
+
+
 ## How to Compile Your Files Securely and Protect Against Decompilation and Debugging Attacks?
 
 If you want your exe file to be secure, you should avoid using PyInstaller to compile your Python file into an executable, as this process can be easily reversed. To maintain the source code of our program and make it difficult for checkers/reverse engineers, we should use "Nuitka".
@@ -25,3 +50,4 @@ python -m nuitka --follow-imports --onefile --standalone --windows-icon-from-ico
 ```
 
 After completing these three steps, our code will be well-protected. However, it's important to note that the best way to secure our application is to keep part of the code on the server-side as an API and perform certain operations there. This approach will result in an almost unbreakable application.
+
