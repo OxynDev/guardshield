@@ -21,7 +21,7 @@ The first step is to obfuscate our code using tools like this website, which all
 The next step is to compile the code using Nuitka. Here's an example command:
 
 ```python
-python -m nuitka --follow-imports --onefile --standalone --include-package-data=playwright --windows-icon-from-ico=icon.ico main.py
+python -m nuitka --follow-imports --onefile --standalone --windows-icon-from-ico=icon.ico main.py
 ```
 
 After completing these three steps, our code will be well-protected. However, it's important to note that the best way to secure our application is to keep part of the code on the server-side as an API and perform certain operations there. This approach will result in an almost unbreakable application.
