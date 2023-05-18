@@ -29,8 +29,14 @@ module = excersec.Security(
     )
 module.check_security()
 ```
-
-
+Simple check
+```python
+module.isDebugged()
+```
+Kill app
+```python
+module.kill()
+```
 
 
 
