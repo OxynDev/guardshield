@@ -1,19 +1,19 @@
-# GuardShield ( python security )
+# ExcerSec ( python security )
 
-GuardShield is a Python library that utilizes C++ to detect whether the current Python project is being debugged and provides an easy way to prevent it. With a wide range of 20 detection methods, GuardShield offers robust protection against debugging attempts, ensuring secure exe execution.
+ExcerSec is a Python library that utilizes C++ to detect whether the current Python project is being debugged and provides an easy way to prevent it. With a wide range of 20 detection methods, ExcerSec offers robust protection against debugging attempts, ensuring secure exe execution.
 
 
 ## Installation
 
 ```python
-pip install guardshield
+pip install excersec
 ```
 
 
 ## Usage
 Import 
 ```python
-import guardshield
+import excersec
 ```
 Anti debugger detection loop
 ```python
@@ -21,7 +21,7 @@ Anti debugger detection loop
 def debbuger_detected():
     print("skid")
 
-module = guardshield.Security(
+module = excersec.Security(
     anti_debugger=True, # Debbuger detection
     kill_on_debug=True, # Kill app on detection
     custom_function_on_detection=debbuger_detected # Called function on detection
@@ -45,7 +45,7 @@ If you want your exe file to be secure, you should avoid using PyInstaller to co
 
 Nuitka is a source-to-source compiler that compiles Python code into C source code, applying certain compile-time optimizations such as constant folding and propagation, built-in call prediction, type inference, and conditional execution.
 
-The first step is to obfuscate our code using tools like this website, which allows for variable name obfuscation (e.g., https://pyob.oxyry.com/). After obfuscating the code, we can further enhance the protection by importing GuardShield to prevent debugging.
+The first step is to obfuscate our code using tools like this website, which allows for variable name obfuscation (e.g., https://pyob.oxyry.com/). After obfuscating the code, we can further enhance the protection by importing ExcerSec to prevent debugging.
 
 The next step is to compile the code using Nuitka. Here's an example command:
 
