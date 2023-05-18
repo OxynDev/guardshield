@@ -13,11 +13,11 @@ pip install excersec
 ## Usage
 
 Import 
-``python
-import excersec``
-
+```python
+import excersec
+```
 Anti debugger detection loop
-``python
+```python
 # Custom own function
 def debbuger_detected():
     print("skid")
@@ -29,7 +29,7 @@ module = excersec.Security(
     custom_function_on_detection=debbuger_detected # Called function on detection
     )
 module.check_security()
-``
+```
 
 
 
