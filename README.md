@@ -21,12 +21,13 @@ Anti debugger detection loop
 def debbuger_detected():
     print("skid")
 
-# threaded loop
 module = excersec.Security(
     anti_debugger=True, # Debbuger detection
     kill_on_debug=True, # Kill app on detection
     custom_function_on_detection=debbuger_detected # Called function on detection
     )
+    
+# Loop in thread
 module.check_security()
 ```
 Simple check
