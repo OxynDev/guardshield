@@ -6,7 +6,7 @@ ExcerSec is a Python library that utilizes C++ to detect whether the current Pyt
 ## Installation
 
 ```python
-pip install ...
+pip install excersec
 ```
 
 
