@@ -8,7 +8,7 @@ setuptools.setup(
     description="Security lib",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    url='https://github.com/OxynDev/ExcerSec',
+    url='https://github.com/OxynDev/guardshield',
     zip_safe=False,
     license='MIT',
     package_data={
