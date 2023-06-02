@@ -1,4 +1,4 @@
-# GuardShield ( python security )
+# [UPDATE FIX TOMORROW] GuardShield ( python security )
 
 GuardShield is a Python library that utilizes C++ to detect whether the current Python project is being debugged and provides an easy way to prevent it. With a wide range of 20 detection methods, GuardShield offers robust protection against debugging attempts, ensuring secure exe execution.
 
@@ -54,4 +54,3 @@ python -m nuitka --follow-imports --onefile --standalone --include-package-data=
 ```
 
 After completing these three steps, our code will be well-protected. However, it's important to note that the best way to secure our application is to keep part of the code on the server-side as an API and perform certain operations there. This approach will result in an almost unbreakable application.
-

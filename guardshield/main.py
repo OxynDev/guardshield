@@ -1,5 +1,5 @@
-import os, ctypes, threading, time, io
-import dllbytes
+import os, ctypes, threading, time, io, tempfile
+from .dll_bytes import dll_bytes
 
 timeout = 0.1
 
@@ -47,8 +47,12 @@ class Security:
 
     def load_dll(self) -> None:
         #path = pkg_resources.resource_filename(__name__, 'lib.dll')
-        self.dll = ctypes.WinDLL(io.BytesIO(dllbytes))
 
+        temp_file = tempfile.NamedTemporaryFile(suffix='.dll', delete=False)
+        temp_file.write(dll_bytes)
+        temp_file.close()
+        self.dll = ctypes.WinDLL(temp_file.name)
+        
             
     def check_security(self) -> None:
 

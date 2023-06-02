@@ -1,18 +1,19 @@
-import setuptools
+import setuptools, os
+
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setuptools.setup(
     name="guardshield",
-    version="1.0.0",
+    version="1.0.4",
     author="Oxyn",
     author_email="oxyn.dev@gmail.com",
     description="Security lib",
+    keywords = "python anti debugger security exe",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    url='https://github.com/OxynDev/guardshield',
+    url='https://github.com/OxynDev/ExcerSec',
     zip_safe=False,
     license='MIT',
-    package_data={
-        'guardshield': ['lib.dll'], 
-    },
-    data_files=[('guardshield', ['guardshield/lib.dll'])],
+    long_description=read('README.md'),
 )
