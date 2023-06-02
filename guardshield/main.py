@@ -1,4 +1,5 @@
-import os, ctypes, threading, time
+import os, ctypes, threading, time, io
+import dllbytes
 
 timeout = 0.1
 
@@ -44,11 +45,11 @@ class Security:
             "custom_function_on_detection" : custom_function_on_detection
         }
 
-
     def load_dll(self) -> None:
-        this_dir = os.path.abspath(os.path.dirname(__file__))
-        self.dll = ctypes.WinDLL(os.path.join(this_dir, r'lib.dll'))
-    
+        #path = pkg_resources.resource_filename(__name__, 'lib.dll')
+        self.dll = ctypes.WinDLL(io.BytesIO(dllbytes))
+
+            
     def check_security(self) -> None:
 
         if self.settings['anti_debugger'] == True:
@@ -67,6 +68,4 @@ class Security:
             return False
         else:
             return True
-
-
 
