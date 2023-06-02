@@ -1,0 +1,14 @@
+﻿  Performing Custom Build Tools
+  Microsoft (R) Macro Assembler (x64) Version 14.29.30148.0
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+   Assembling: AntiDBG.asm
+  functions.cpp
+  dllmain.cpp
+     Creating library C:\Users\cbvxv\source\repos\ExcerSec\x64\Release\AntiDBG.lib and object C:\Users\cbvxv\source\repos\ExcerSec\x64\Release\AntiDBG.exp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+C:\Users\cbvxv\source\repos\ExcerSec\antidbg\functions.cpp(295): warning C4715: 'adbg_NtSetInformationThread': not all control paths return a value
+  All 96 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  AntiDBG.vcxproj -> C:\Users\cbvxv\source\repos\ExcerSec\x64\Release\AntiDBG.dll
