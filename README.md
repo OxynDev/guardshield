@@ -55,6 +55,10 @@ python -m nuitka --follow-imports --onefile --standalone --windows-icon-from-ico
 
 After completing these three steps, our code will be well-protected. However, it's important to note that the best way to secure our application is to keep part of the code on the server-side as an API and perform certain operations there. This approach will result in an almost unbreakable application.
 
+## Todo
+
+- [ ] Add dll injection protect
+
 ## Tests
 
 ![](https://github.com/OxynDev/guardshield/blob/ac9b56845ff0deb4de33363abe4025e119e830b7/temp/1.gif)
