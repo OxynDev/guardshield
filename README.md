@@ -40,7 +40,7 @@ module.kill()
 ```
 Sandboxie detection
 ```python
-print(module.isSandboxed())
+module.isSandboxed()
 ```
 
 
