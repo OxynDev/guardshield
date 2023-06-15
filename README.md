@@ -38,6 +38,11 @@ Kill app
 ```python
 module.kill()
 ```
+Sandboxie detection
+```python
+print(module.isSandboxed())
+```
+
 
 ## How to Compile Your Files Securely and Protect Against Decompilation and Debugging Attacks?
 
@@ -57,6 +62,7 @@ After completing these three steps, our code will be well-protected. However, it
 
 ## Todo
 
+- [x] Add sandboxie detection
 - [ ] Add dll injection protect
 
 ## Tests
