@@ -89,6 +89,7 @@ bool adbg_GetTickCount();
 
 // Other
 void adbg_CrashOllyDbg();
+bool isSandboxDetected();
 
 // Exception
 bool adbg_CloseHandleException();

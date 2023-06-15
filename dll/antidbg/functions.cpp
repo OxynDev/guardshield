@@ -18,6 +18,24 @@ using namespace std;
 
 
 
+bool isSandboxDetected() {
+
+    HWND hwnd = FindWindowA("SandboxieControlWndClass", NULL);
+    if (hwnd != NULL)
+        return true;
+
+    std::string sandboxieFolder = "C:\\Sandboxie";
+    DWORD fileAttributes = GetFileAttributesA(sandboxieFolder.c_str());
+    if (fileAttributes != INVALID_FILE_ATTRIBUTES && (fileAttributes & FILE_ATTRIBUTE_DIRECTORY))
+        return true;
+
+    HMODULE module = GetModuleHandleA("sbiedll.dll");
+    if (module != NULL)
+        return true;
+
+    return false;
+}
+
 
 
 

@@ -5,7 +5,6 @@
 #include <thread>
 
 
-
 bool adbg_IsDebuggerPresent();
 bool adbg_BeingDebuggedPEB();
 bool adbg_NtGlobalFlagPEB();
@@ -26,10 +25,12 @@ bool adbg_Int3();
 bool adbg_Int2D();
 bool adbg_PrefixHop();
 
-
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) {
     return TRUE;
 }
+
+
+
 
 
 extern "C" {
@@ -50,8 +51,20 @@ extern "C" {
         return false;
     }
 
+    __declspec(dllexport) int isSandbox() {
+        if (isSandboxDetected())
+            return true;
+        else
+            return false;
+
+        return false;
+    }
+
+
+
     __declspec(dllexport) int kill () {
         TerminateProcess(GetCurrentProcess(), 0);
         return 0;
     }
 }
+
