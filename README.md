@@ -1,4 +1,4 @@
-# GuardShield ( python security )
+# [UPDATE FIX TOMORROW] GuardShield ( python security )
 
 GuardShield is a Python library that utilizes C++ to detect whether the current Python project is being debugged and provides an easy way to prevent it. With a wide range of 20 detection methods, GuardShield offers robust protection against debugging attempts, ensuring secure exe execution.
 
@@ -38,11 +38,6 @@ Kill app
 ```python
 module.kill()
 ```
-Sandboxie detection
-```python
-module.isSandboxed()
-```
-
 
 ## How to Compile Your Files Securely and Protect Against Decompilation and Debugging Attacks?
 
@@ -55,21 +50,7 @@ The first step is to obfuscate our code using tools like this website, which all
 The next step is to compile the code using Nuitka. Here's an example command:
 
 ```python
-python -m nuitka --follow-imports --onefile --standalone --windows-icon-from-ico=icon.ico main.py
+python -m nuitka --follow-imports --onefile --standalone --include-package-data=guardshield --windows-icon-from-ico=icon.ico main.py
 ```
 
 After completing these three steps, our code will be well-protected. However, it's important to note that the best way to secure our application is to keep part of the code on the server-side as an API and perform certain operations there. This approach will result in an almost unbreakable application.
-
-## Todo
-
-- [x] Add sandboxie detection
-- [ ] Add dll injection protect
-
-## Tests
-
-![](https://github.com/OxynDev/guardshield/blob/ac9b56845ff0deb4de33363abe4025e119e830b7/temp/1.gif)
-
-![](https://github.com/OxynDev/guardshield/blob/4c971d7bebb2a04d54e7819561f5d850655a1881/temp/2.gif)
-
-![](https://github.com/OxynDev/guardshield/blob/bd7c082bf12272f35e63988267df144039d70873/temp/3.gif)
-

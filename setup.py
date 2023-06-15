@@ -5,7 +5,7 @@ def read(fname):
 
 setuptools.setup(
     name="guardshield",
-    version="1.0.4",
+    version="1.0.5",
     author="Oxyn",
     author_email="oxyn.dev@gmail.com",
     description="Security lib",
@@ -16,4 +16,5 @@ setuptools.setup(
     zip_safe=False,
     license='MIT',
     long_description=read('README.md'),
+    long_description_content_type='text/markdown'
 )

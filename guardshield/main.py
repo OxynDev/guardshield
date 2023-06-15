@@ -73,3 +73,9 @@ class Security:
         else:
             return True
 
+
+    def isSandboxed(self) -> bool:
+        if self.dll.isSandbox() == 0:
+            return False
+        else:
+            return True
