@@ -39,6 +39,11 @@ Kill app
 module.kill()
 ```
 
+Sandboxie detection
+```python 
+module.isSandboxed()
+```
+
 ## How to Compile Your Files Securely and Protect Against Decompilation and Debugging Attacks?
 
 If you want your exe file to be secure, you should avoid using PyInstaller to compile your Python file into an executable, as this process can be easily reversed. To maintain the source code of our program and make it difficult for checkers/reverse engineers, we should use "Nuitka".
