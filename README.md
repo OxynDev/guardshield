@@ -59,19 +59,6 @@ python -m nuitka --follow-imports --onefile --standalone --windows-icon-from-ico
 
 By following these steps, your code will be well-protected. However, for the utmost security, consider keeping sensitive parts of your code on the server-side as an API and perform critical operations there. This approach adds an extra layer of protection and makes your application almost unbreakable.
 
-## Todo
-
-- [x] Add sandboxie detection
-- [ ] Add DLL injection protection
-
-## Tests
-
-![Test 1](https://github.com/OxynDev/guardshield/blob/ac9b56845ff0deb4de33363abe4025e119e830b7/temp/1.gif)
-
-![Test 2](https://github.com/OxynDev/guardshield/blob/4c971d7bebb2a04d54e7819561f5d850655a1881/temp/2.gif)
-
-![Test 3](https://github.com/OxynDev/guardshield/blob/bd7c082bf12272f35e63988267df144039d70873/temp/3.gif)
-
 ## Request Encryption
 
 To enhance the security of your API requests, it is recommended to encrypt the requests or add a fingerprint (custom hash) to the request that can be checked in the application and on the server. Here's an example of AES encryption using the `AESCipher` class:
@@ -124,3 +111,17 @@ class Aes:
 ```
 
 You can use the `Aes` class to encrypt and decrypt your requests using AES encryption. Remember to use a strong and secure key for encryption.
+
+
+## Todo
+
+- [x] Add sandboxie detection
+- [ ] Add DLL injection protection
+
+## Tests
+
+![Test 1](https://github.com/OxynDev/guardshield/blob/ac9b56845ff0deb4de33363abe4025e119e830b7/temp/1.gif)
+
+![Test 2](https://github.com/OxynDev/guardshield/blob/4c971d7bebb2a04d54e7819561f5d850655a1881/temp/2.gif)
+
+![Test 3](https://github.com/OxynDev/guardshield/blob/bd7c082bf12272f35e63988267df144039d70873/temp/3.gif)
