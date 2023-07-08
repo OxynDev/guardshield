@@ -1,2 +1,2 @@
-^C:\USERS\CBVXV\SOURCE\REPOS\EXCERSEC\ANTIDBG\ANTIDBG.ASM
-ml64 /c /FoC:\Users\cbvxv\source\repos\ExcerSec\x64\Release\\AntiDBG.obj AntiDBG.asm
+^C:\USERS\CBVXV\DESKTOP\DLL\ANTIDBG\ANTIDBG.ASM
+ml64 /c /FoC:\Users\cbvxv\Desktop\dll\x64\Release\\AntiDBG.obj AntiDBG.asm

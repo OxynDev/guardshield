@@ -51,6 +51,15 @@ extern "C" {
         return false;
     }
 
+    __declspec(dllexport) int IsVm() {
+        if (IsRdp() || IsVM())
+            return true;
+        else
+            return false;
+
+        return false;
+    }
+
     __declspec(dllexport) int isSandbox() {
         if (isSandboxDetected())
             return true;
@@ -59,8 +68,6 @@ extern "C" {
 
         return false;
     }
-
-
 
     __declspec(dllexport) int kill () {
         TerminateProcess(GetCurrentProcess(), 0);

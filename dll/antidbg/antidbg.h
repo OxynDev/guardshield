@@ -89,7 +89,12 @@ bool adbg_GetTickCount();
 
 // Other
 void adbg_CrashOllyDbg();
+
+// Os
 bool isSandboxDetected();
+bool IsVM();
+bool IsRdp();
+
 
 // Exception
 bool adbg_CloseHandleException();

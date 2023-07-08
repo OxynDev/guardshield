@@ -1,5 +1,6 @@
 #include "AntiDBG.h"
 #include <iostream>
+#include <intrin.h>
 using namespace std;
 
 
@@ -113,7 +114,7 @@ bool adbg_CheckWindowName()
 bool adbg_ProcessFileName()
 {
     // detect debugger by process file (for example: ollydbg.exe)
-    const wchar_t *debuggersFilename[29] = {
+    const wchar_t *debuggersFilename[28] = {
             L"cheatengine-x86_64.exe", 
             L"ollydbg.exe", 
             L"ida.exe", 
@@ -143,7 +144,6 @@ bool adbg_ProcessFileName()
             L"vmusrvc.exe",
             L"prl_cc.exe",
             L"prl_tools.exe",
-            L"qemu-ga.exe",
             L"ksdumperclient.exe",
             L"ksdumper.exe",
     };
@@ -173,6 +173,93 @@ bool adbg_ProcessFileName()
 
     return false;
 }
+
+
+
+
+bool IsRdp()
+{
+
+    const wchar_t* debuggersFilename[1] = {
+        L"qemu-ga.exe",
+    };
+
+    wchar_t* processName;
+    PROCESSENTRY32W processInformation{ sizeof(PROCESSENTRY32W) };
+    HANDLE processList;
+
+    processList = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, NULL);
+    processInformation = { sizeof(PROCESSENTRY32W) };
+    if (!(Process32FirstW(processList, &processInformation)))
+        printf("[Warning] It is impossible to check process list.");
+    else
+    {
+        do
+        {
+            for (const wchar_t* debugger : debuggersFilename)
+            {
+                processName = processInformation.szExeFile;
+                if (_wcsicmp(debugger, processName) == 0) {
+                    return true;
+                }
+            }
+        } while (Process32NextW(processList, &processInformation));
+    }
+    CloseHandle(processList);
+
+    return false;
+
+}
+
+bool IsVM()
+{
+    int cpuInfo[4] = {};
+
+    //
+    // Upon execution, code should check bit 31 of register ECX
+    // (the “hypervisor present bit”). If this bit is set, a hypervisor is present.
+    // In a non-virtualized environment, the bit will be clear.
+    //
+    __cpuid(cpuInfo, 1);
+
+
+    if (!(cpuInfo[2] & (1 << 31)))
+        return false;
+
+    //
+    // A hypervisor is running on the machine. Query the vendor id.
+    //
+    const auto queryVendorIdMagic = 0x40000000;
+    __cpuid(cpuInfo, queryVendorIdMagic);
+
+    const int vendorIdLength = 13;
+    using VendorIdStr = char[vendorIdLength];
+
+    VendorIdStr hyperVendorId = {};
+
+    memcpy(hyperVendorId + 0, &cpuInfo[1], 4);
+    memcpy(hyperVendorId + 4, &cpuInfo[2], 4);
+    memcpy(hyperVendorId + 8, &cpuInfo[3], 4);
+    hyperVendorId[12] = '\0';
+
+    static const VendorIdStr vendors[]{
+    "KVMKVMKVM\0\0\0", // KVM 
+    "Microsoft Hv",    // Microsoft Hyper-V or Windows Virtual PC */
+    "VMwareVMware",    // VMware 
+    "XenVMMXenVMM",    // Xen 
+    "prl hyperv  ",    // Parallels
+    "VBoxVBoxVBox"     // VirtualBox 
+    };
+
+    for (const auto& vendor : vendors)
+    {
+        if (!memcmp(vendor, hyperVendorId, vendorIdLength))
+            return true;
+    }
+
+    return false;
+}
+
 
 bool adbg_CheckWindowClassName()
 {
