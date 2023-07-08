@@ -5,7 +5,7 @@ def read(fname):
 
 setuptools.setup(
     name="guardshield",
-    version="1.0.5",
+    version="1.0.6",
     author="Oxyn",
     author_email="oxyn.dev@gmail.com",
     description="Security lib",

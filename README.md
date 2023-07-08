@@ -1,6 +1,7 @@
-# GuardShield (Python security)
+# [UPDATE FIX TOMORROW] GuardShield ( python security )
 
-GuardShield is a Python library that provides robust security measures to protect your Python projects. It offers various detection methods to prevent debugging attempts and ensure secure execution of your code.
+GuardShield is a Python library that utilizes C++ to detect whether the current Python project is being debugged and provides an easy way to prevent it. With a wide range of 20 detection methods, GuardShield offers robust protection against debugging attempts, ensuring secure exe execution.
+
 
 ## Installation
 
@@ -8,118 +9,48 @@ GuardShield is a Python library that provides robust security measures to protec
 pip install guardshield
 ```
 
+
 ## Usage
-Import the library:
+Import 
 ```python
 import guardshield
 ```
-
-Enable anti-debugger detection and define custom actions on detection:
+Anti debugger detection loop
 ```python
-# Custom function to be executed on debugger detection
-def debugger_detected():
-    print("Debugger detected!")
+# Custom own function
+def debbuger_detected():
+    print("skid")
 
-# Create a Security instance with desired settings
 module = guardshield.Security(
-    anti_debugger=True, # Enable debugger detection
-    kill_on_debug=True, # Kill the application on detection
-    custom_function_on_detection=debugger_detected # Execute custom function on detection
-)
-
-# Start the security check loop in a separate thread
+    anti_debugger=True, # Debbuger detection
+    kill_on_debug=True, # Kill app on detection
+    custom_function_on_detection=debbuger_detected # Called function on detection
+    )
+    
+# Loop in thread
 module.check_security()
 ```
-
-Perform simple checks:
+Simple check
 ```python
-# Check if the application is being debugged
 module.isDebugged()
-
-# Terminate the application
+```
+Kill app
+```python
 module.kill()
-
-# Detect if the application is running within a sandbox environment (e.g., Sandboxie)
-module.isSandboxed()
 ```
 
-## Secure Compilation and Protection Against Decompilation and Debugging Attacks
+## How to Compile Your Files Securely and Protect Against Decompilation and Debugging Attacks?
 
-To ensure the security of your executable (`.exe`) file, it is recommended to avoid using PyInstaller for compilation, as it can be easily reversed. Instead, you can use "Nuitka," a source-to-source compiler that compiles Python code into optimized C source code, making it harder for checkers and reverse engineers to understand and modify your code.
+If you want your exe file to be secure, you should avoid using PyInstaller to compile your Python file into an executable, as this process can be easily reversed. To maintain the source code of our program and make it difficult for checkers/reverse engineers, we should use "Nuitka".
 
-Follow these steps to compile your code securely:
+Nuitka is a source-to-source compiler that compiles Python code into C source code, applying certain compile-time optimizations such as constant folding and propagation, built-in call prediction, type inference, and conditional execution.
 
-1. Obfuscate your code using tools like the [Pyobfuscate](https://pyob.oxyry.com/) website, which can obfuscate variable names and enhance protection.
-2. Import GuardShield to prevent debugging during the execution of your code.
-3. Compile the code using Nuitka. Here's an example command:
+The first step is to obfuscate our code using tools like this website, which allows for variable name obfuscation (e.g., https://pyob.oxyry.com/). After obfuscating the code, we can further enhance the protection by importing GuardShield to prevent debugging.
+
+The next step is to compile the code using Nuitka. Here's an example command:
 
 ```python
-python -m nuitka --follow-imports --onefile --standalone --windows-icon-from-ico=icon.ico main.py
+python -m nuitka --follow-imports --onefile --standalone --include-package-data=guardshield --windows-icon-from-ico=icon.ico main.py
 ```
 
-By following these steps, your code will be well-protected. However, for the utmost security, consider keeping sensitive parts of your code on the server-side as an API and perform critical operations there. This approach adds an extra layer of protection and makes your application almost unbreakable.
-
-## Request Encryption
-
-To enhance the security of your API requests, it is recommended to encrypt the requests or add a fingerprint (custom hash) to the request that can be checked in the application and on the server. Here's an example of AES encryption using the `AESCipher` class:
-
-```python
-import base64
-from Crypto.Cipher import AES
-from Crypto import Random
-import hashlib
-
-class AESCipher(object):
-    def __init__(self, key):
-        self.bs = AES.block_size
-        self.key = hashlib.sha256(key.encode()).digest()
-
-    def encrypt(self, raw):
-        raw = self._pad(raw)
-        iv = Random.new().read(AES.block_size)
-        cipher = AES.new(self.key, AES.MODE_CBC, iv)
-        return base64.b64encode(iv + cipher.encrypt(raw.encode()))
-
-    def decrypt(self, enc):
-        enc = base64.b64decode(enc)
-        iv = enc[:AES.block_size]
-        cipher = AES.new(self.key, AES.MODE_CBC, iv)
-        return self._unpad(cipher.decrypt(enc[AES.block_size:])).decode('utf-8')
-
-    def _pad(self, s):
-        return s + (self.bs - len(s) % self.bs) * chr(self.bs - len(s) % self.bs)
-
-    @staticmethod
-    def _unpad(s):
-        return s[:-ord(s[len(s)-1:])]
-
-class Aes:
-    def __init__(self):
-        self.key = "SecKey2115"
-
-    def decrypt(self, text, key=None):
-        if key is not None:
-            self.key = key
-        return AESCipher(self.key).decrypt(text)
-
-    def encrypt(self, text, key=None):
-        if key is not None:
-            self.key = key
-        return AESCipher(self.key).encrypt(text).decode()
-```
-
-You can use the `Aes` class to encrypt and decrypt your requests using AES encryption. Remember to use a strong and secure key for encryption.
-
-
-## Todo
-
-- [x] Add sandboxie detection
-- [ ] Add DLL injection protection
-
-## Tests
-
-![Test 1](https://github.com/OxynDev/guardshield/blob/ac9b56845ff0deb4de33363abe4025e119e830b7/temp/1.gif)
-
-![Test 2](https://github.com/OxynDev/guardshield/blob/4c971d7bebb2a04d54e7819561f5d850655a1881/temp/2.gif)
-
-![Test 3](https://github.com/OxynDev/guardshield/blob/bd7c082bf12272f35e63988267df144039d70873/temp/3.gif)
+After completing these three steps, our code will be well-protected. However, it's important to note that the best way to secure our application is to keep part of the code on the server-side as an API and perform certain operations there. This approach will result in an almost unbreakable application.

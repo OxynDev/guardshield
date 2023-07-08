@@ -62,6 +62,12 @@ class Security:
                 settings = self.settings
             )
 
+    def check_vm(self) -> bool:
+        if self.dll.IsVm() == 0:
+            return False
+        else:
+            return True
+
     def force_kill(self):
         self.dll.kill()
         os.close()
