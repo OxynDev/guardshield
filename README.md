@@ -41,6 +41,9 @@ module.kill()
 
 # Detect if the application is running within a sandbox environment (e.g., Sandboxie)
 module.isSandboxed()
+
+# Detect if the application is running in vm 
+module.check_vm()
 ```
 
 ## Secure Compilation and Protection Against Decompilation and Debugging Attacks
@@ -114,6 +117,7 @@ You can use the `Aes` class to encrypt and decrypt your requests using AES encry
 ## Todo
 
 - [x] Add sandboxie detection
+- [x] Add Vm detection
 - [ ] Add DLL injection protection
 
 ## Tests
