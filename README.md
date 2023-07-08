@@ -42,7 +42,7 @@ module.kill()
 # Detect if the application is running within a sandbox environment (e.g., Sandboxie)
 module.isSandboxed()
 
-# Detect if the application is running in vm 
+# Detect if the application is running in vm and rdp
 module.check_vm()
 ```
 
