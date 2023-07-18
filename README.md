@@ -5,7 +5,7 @@ GuardShield is a Python library that provides robust security measures to protec
 ## Installation
 
 ```python
-pip install guardshield
+pip install --force-reinstall guardshield
 ```
 
 ## Usage
