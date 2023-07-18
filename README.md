@@ -58,7 +58,7 @@ module.get_uuid() # -> str
 
 ## Change log
 ```diff
-v1.1.0 ⋮ 18/07/2023
+v1.1.1 ⋮ 18/07/2023
 + better cheat engine detection added
 + function names changed [ isSandboxed -> check_sandbox, isDebugged -> check_debug ]
 + added detect_vm and detect_sandbox to Security args
