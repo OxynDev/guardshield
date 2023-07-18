@@ -57,7 +57,7 @@ module.get_uuid() # -> str
 ```diff
 v1.0.7 ⋮ 25/03/2023
 + crash_pc (Blue screen) function added
-+ get_uuid (Create save pc fingerprint / hwid) function added
++ get_uuid (Create pc fingerprint / hwid) function added
 ```
 
 
