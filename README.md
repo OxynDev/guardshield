@@ -23,8 +23,11 @@ def debugger_detected():
 # Create a Security instance with desired settings
 module = guardshield.Security(
     anti_debugger=True, # Enable debugger detection
-    kill_on_debug=True, # Kill the application on detection
-    custom_function_on_detection=debugger_detected # Execute custom function on detection
+    kill_on_debug=False, # Kill the application on detection
+    detect_vm=False, # Call custom function on vm detection
+    detect_sandbox=False, # Call custom function on sandbox detection
+    on_detection=debugger_detected # Execute custom function on detection
+
 )
 
 # Start the security check loop in a separate thread
