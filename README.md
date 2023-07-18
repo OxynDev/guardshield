@@ -134,7 +134,8 @@ You can use the `Aes` class to encrypt and decrypt your requests using AES encry
 - [x] Add sandboxie detection
 - [x] Add Vm detection
 - [ ] Add DLL injection protection
-
+- [ ] Add Better cheat engine detection
+      
 ## Tests
 
 ![Test 1](https://github.com/OxynDev/guardshield/blob/ac9b56845ff0deb4de33363abe4025e119e830b7/temp/1.gif)
