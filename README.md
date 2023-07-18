@@ -37,7 +37,7 @@ Perform simple checks:
 module.isDebugged()
 
 # Terminate the application
-module.kill()
+module.force_kill()
 
 # Detect if the application is running within a sandbox environment (e.g., Sandboxie)
 module.isSandboxed()
