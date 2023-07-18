@@ -1,5 +1,6 @@
 import os, ctypes, threading, time, io, tempfile, platform, subprocess, hashlib
 from .dll_bytes import dll_bytes
+from .core import cheatengine
 
 timeout = 0.1
 
@@ -9,15 +10,16 @@ class AntiDebugger:
     def __init__(self, dll, settings):
         self.settings = settings
         self.dll = dll
-        threading.Thread(target=self.start).start()
+        threading.Thread(target=self.dll_detector).start()
+        threading.Thread(target=self.file_monitor).start()
 
-    def start(self) -> None:
+    def dll_detector(self) -> None:
         while True:
 
             if self.dll.isDebugged() == 0:
                 pass
             else:
-                function_check = self.settings['custom_function_on_detection']
+                function_check = self.settings['on_detection']
                 if function_check != None:
                     function_check()
                 if self.settings['kill_on_debug'] == True:
@@ -26,6 +28,16 @@ class AntiDebugger:
 
             time.sleep(timeout)
 
+    def file_monitor(self):
+        res = cheatengine.monitor_dir(tempfile.gettempdir())
+        if res == True:
+            function_check = self.settings['on_detection']
+            if function_check != None:
+                function_check()
+            if self.settings['kill_on_debug'] == True:
+                self.dll.kill()
+
+
 class Security:
 
     dll = None
@@ -33,7 +45,9 @@ class Security:
     def __init__(self,
                     anti_debugger: bool = True,
                     kill_on_debug: bool = True,
-                    custom_function_on_detection = None
+                    detect_vm: bool = False,
+                    detect_sandbox: bool = False,
+                    on_detection = None
                     
                  ):
         
@@ -42,7 +56,9 @@ class Security:
         self.settings = {
             "anti_debugger" : anti_debugger,
             "kill_on_debug" : kill_on_debug,
-            "custom_function_on_detection" : custom_function_on_detection
+            "on_detection" : on_detection,
+            "detect_vm" : detect_vm,
+            "detect_sandbox" : detect_sandbox,
         }
 
     def load_dll(self) -> None:
@@ -56,6 +72,26 @@ class Security:
         
             
     def check_security(self) -> None:
+
+        if self.settings['detect_vm'] == True:
+            if self.check_vm() == True:
+                function_check = self.settings['on_detection']
+                if function_check != None:
+                    function_check()
+                return {
+                    "detected":True, 
+                    "description": "vm detected"
+                    }
+            
+        if self.settings['detect_sandbox'] == True:
+            if self.check_sandbox() == True:
+                function_check = self.settings['on_detection']
+                if function_check != None:
+                    function_check()
+                return {
+                    "detected":True, 
+                    "description": "sandbox detected"
+                    }
 
         if self.settings['anti_debugger'] == True:
             AntiDebugger(
@@ -74,14 +110,14 @@ class Security:
         os.close()
         exit()
         
-    def isDebugged(self) -> bool:
+    def check_debug(self) -> bool:
         if self.dll.isDebugged() == 0:
             return False
         else:
             return True
 
 
-    def isSandboxed(self) -> bool:
+    def check_sandbox(self) -> bool:
         if self.dll.isSandbox() == 0:
             return False
         else:
