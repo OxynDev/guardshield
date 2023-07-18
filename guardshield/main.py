@@ -1,4 +1,4 @@
-import os, ctypes, threading, time, io, tempfile
+import os, ctypes, threading, time, io, tempfile, platform, subprocess, hashlib
 from .dll_bytes import dll_bytes
 
 timeout = 0.1
@@ -53,6 +53,7 @@ class Security:
         temp_file.close()
         self.dll = ctypes.WinDLL(temp_file.name)
         
+        
             
     def check_security(self) -> None:
 
@@ -85,3 +86,39 @@ class Security:
             return False
         else:
             return True
+
+    def crash_pc(self) -> None:
+
+        A=ctypes.POINTER(ctypes.c_int)()
+        ctypes.windll.ntdll.RtlAdjustPrivilege(
+            ctypes.c_uint(19),
+            ctypes.c_uint(1),
+            ctypes.c_uint(0),
+            ctypes.byref(ctypes.c_int())
+        )
+        ctypes.windll.ntdll.NtRaiseHardError(
+            ctypes.c_ulong(3221225595),
+            ctypes.c_ulong(0),
+            A,
+            A,
+            ctypes.c_uint(6),
+            ctypes.byref(ctypes.c_uint())
+        )
+        
+    def get_uuid(self) -> str:
+        
+        hash_value = 0
+        for char in str(subprocess.check_output('wmic computersystem get model,manufacturer')):
+            hash_value += ord(char)
+
+        list_to_hash = [
+            platform.machine(),
+            platform.processor(),
+            platform.win32_edition(),
+            platform.win32_is_iot(),
+            str(subprocess.check_output('wmic csproduct get uuid')).split(f'\\r\\n')[1].strip(f'\\r').strip(),
+            str(hash_value),
+            "hwid by guardshield"
+        ]
+
+        return hashlib.sha256(str(list_to_hash).encode()).hexdigest()
