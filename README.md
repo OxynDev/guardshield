@@ -37,14 +37,29 @@ Perform simple checks:
 module.isDebugged() # -> bool
 
 # Terminate the application
-module.force_kill() # -> Kill self process
+module.force_kill() # -> None
 
 # Detect if the application is running within a sandbox environment (e.g., Sandboxie)
 module.isSandboxed() # -> bool
 
 # Detect if the application is running in vm and rdp
 module.check_vm() # -> bool
+
+# Crash user pc with Blue screen
+module.crash_pc() # -> None
+
+# Create save pc fingerprint / hwid
+module.get_uuid() # -> str
+
 ```
+
+## Change log
+```diff
+v1.0.7 ⋮ 25/03/2023
++ crash_pc (Blue screen) function added
++ get_uuid (Create save pc fingerprint / hwid) function added
+```
+
 
 ## Secure Compilation and Protection Against Decompilation and Debugging Attacks
 
