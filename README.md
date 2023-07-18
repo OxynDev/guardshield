@@ -28,16 +28,16 @@ module = guardshield.Security(
 )
 
 # Start the security check loop in a separate thread
-module.check_security()
+module.check_security() # -> dict { 'detected' : bool, 'description' : str }
 ```
 
 Perform simple checks:
 ```python
 # Check if the application is being debugged
-module.isDebugged() # -> bool
+module.check_debug() # -> bool
 
 # Detect if the application is running within a sandbox environment (e.g., Sandboxie)
-module.isSandboxed() # -> bool
+module.check_sandbox() # -> bool
 
 # Terminate the application
 module.force_kill() # -> None
@@ -55,7 +55,12 @@ module.get_uuid() # -> str
 
 ## Change log
 ```diff
-v1.0.8 ⋮ 25/03/2023
+v1.0.9 ⋮ 18/07/2023
++ better cheat engine detection added
++ function names changed [ isSandboxed -> check_sandbox, isDebugged -> check_debug ]
++ added detect_vm and detect_sandbox to Security args
+
+v1.0.8 ⋮ 17/07/2023
 + crash_pc (Blue screen) function added
 + get_uuid (Create pc fingerprint / hwid) function added
 ```
@@ -133,8 +138,9 @@ You can use the `Aes` class to encrypt and decrypt your requests using AES encry
 
 - [x] Add sandboxie detection
 - [x] Add Vm detection
+- [x] Add Better cheat engine detection
 - [ ] Add DLL injection protection
-- [ ] Add Better cheat engine detection
+
       
 ## Tests
 
