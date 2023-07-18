@@ -34,16 +34,16 @@ module.check_security()
 Perform simple checks:
 ```python
 # Check if the application is being debugged
-module.isDebugged()
+module.isDebugged() # -> bool
 
 # Terminate the application
-module.force_kill()
+module.force_kill() # -> Kill self process
 
 # Detect if the application is running within a sandbox environment (e.g., Sandboxie)
-module.isSandboxed()
+module.isSandboxed() # -> bool
 
 # Detect if the application is running in vm and rdp
-module.check_vm()
+module.check_vm() # -> bool
 ```
 
 ## Secure Compilation and Protection Against Decompilation and Debugging Attacks
