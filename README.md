@@ -152,3 +152,5 @@ You can use the `Aes` class to encrypt and decrypt your requests using AES encry
 ![Test 2](https://github.com/OxynDev/guardshield/blob/4c971d7bebb2a04d54e7819561f5d850655a1881/temp/2.gif)
 
 ![Test 3](https://github.com/OxynDev/guardshield/blob/bd7c082bf12272f35e63988267df144039d70873/temp/3.gif)
+
+![Test 4](https://github.com/OxynDev/guardshield/blob/4a13905d9b1ea1bbb84e5f72e2061a5347ee98a4/temp/4.gif)
