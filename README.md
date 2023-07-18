@@ -48,7 +48,7 @@ module.check_vm() # -> bool
 # Crash user pc with Blue screen
 module.crash_pc() # -> None
 
-# Create save pc fingerprint / hwid
+# Create pc fingerprint / hwid
 module.get_uuid() # -> str
 
 ```
