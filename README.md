@@ -36,11 +36,12 @@ Perform simple checks:
 # Check if the application is being debugged
 module.isDebugged() # -> bool
 
-# Terminate the application
-module.force_kill() # -> None
-
 # Detect if the application is running within a sandbox environment (e.g., Sandboxie)
 module.isSandboxed() # -> bool
+
+
+# Terminate the application
+module.force_kill() # -> None
 
 # Detect if the application is running in vm and rdp
 module.check_vm() # -> bool
