@@ -2,6 +2,8 @@
 
 GuardShield is a Python library that provides robust security measures to protect your Python projects. It offers various detection methods to prevent debugging attempts and ensure secure execution of your code.
 
+[Discord](https://discord.gg/8W6BweksGY)
+
 ## Installation
 
 ```python
