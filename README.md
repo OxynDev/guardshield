@@ -85,6 +85,8 @@ Follow these steps to compile your code securely:
 python -m nuitka --follow-imports --onefile --standalone --windows-icon-from-ico=icon.ico main.py
 ```
 
+After compiling the program, you can also provide it with additional protection using the vmprotect application.
+
 By following these steps, your code will be well-protected. However, for the utmost security, consider keeping sensitive parts of your code on the server-side as an API and perform critical operations there. This approach adds an extra layer of protection and makes your application almost unbreakable.
 
 ## Request Encryption
