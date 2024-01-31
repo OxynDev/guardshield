@@ -1,4 +1,3 @@
-import msvcrt
 import win32file
 import win32con
 import win32api

@@ -1,0 +1,10 @@
+﻿  Performing Custom Build Tools
+  Microsoft (R) Macro Assembler (x64) Version 14.38.33130.0
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+   Assembling: AntiDBG.asm
+  functions.cpp
+  dllmain.cpp
+  Generating Code...
+C:\Users\oxyn\Desktop\dev\guardshield-main\dll\antidbg\functions.cpp(418): warning C4715: 'adbg_NtSetInformationThread': not all control paths return a value
+  AntiDBG.vcxproj -> C:\Users\oxyn\Desktop\dev\guardshield-main\dll\x64\Debug\AntiDBG.lib

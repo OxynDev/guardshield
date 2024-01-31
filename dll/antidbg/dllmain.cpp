@@ -39,12 +39,13 @@ extern "C" {
     __declspec(dllexport) bool isDebugged() {
         std::vector<bool(*)()> functions = { adbg_IsDebuggerPresent, adbg_BeingDebuggedPEB, adbg_NtGlobalFlagPEB, adbg_CheckRemoteDebuggerPresent,
                                             adbg_NtQueryInformationProcess, adbg_CheckWindowClassName, adbg_CheckWindowName, adbg_ProcessFileName,
-                                            adbg_NtSetInformationThread, adbg_HardwareDebugRegisters, adbg_MovSS, adbg_RDTSC, adbg_QueryPerformanceCounter,
+                                            adbg_NtSetInformationThread, adbg_HardwareDebugRegisters, adbg_MovSS, adbg_RDTSC,
                                             adbg_GetTickCount, adbg_CloseHandleException, adbg_SingleStepException, adbg_Int3, adbg_Int2D, adbg_PrefixHop };
 
-        for (auto func : functions) {
-            bool result = func();
-            if (result == true) {
+        for (size_t i = 0; i < functions.size(); ++i) {
+            bool result = functions[i]();
+            if (result) {
+                std::cout << i << std::endl;
                 return true;
             }
         }

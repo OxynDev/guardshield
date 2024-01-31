@@ -1,2 +1,2 @@
-^C:\USERS\CBVXV\DESKTOP\DLL\ANTIDBG\ANTIDBG.ASM
-ml64 /c /FoC:\Users\cbvxv\Desktop\dll\x64\Release\\AntiDBG.obj AntiDBG.asm
+^C:\USERS\OXYN\DESKTOP\DEV\GUARDSHIELD-MAIN\DLL\ANTIDBG\ANTIDBG.ASM
+ml64 /c /FoC:\Users\oxyn\Desktop\dev\guardshield-main\dll\x64\Release\\AntiDBG.obj AntiDBG.asm

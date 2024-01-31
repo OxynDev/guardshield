@@ -64,10 +64,11 @@ class Security:
     def load_dll(self) -> None:
         #path = pkg_resources.resource_filename(__name__, 'lib.dll')
 
-        temp_file = tempfile.NamedTemporaryFile(suffix='.dll', delete=False)
+        temp_file = tempfile.NamedTemporaryFile(suffix='.dx', delete=False)
+        os.add_dll_directory(os.path.dirname(temp_file.name))
         temp_file.write(dll_bytes)
         temp_file.close()
-        self.dll = ctypes.WinDLL(temp_file.name)
+        self.dll = ctypes.CDLL(temp_file.name)
         
         
             

@@ -1,0 +1,2 @@
+^C:\USERS\OXYN\DESKTOP\DEV\GUARDSHIELD-MAIN\DLL\ANTIDBG\ANTIDBG.ASM
+ml64 /c /FoC:\Users\oxyn\Desktop\dev\guardshield-main\dll\x64\Debug\\AntiDBG.obj AntiDBG.asm

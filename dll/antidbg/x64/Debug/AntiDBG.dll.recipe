@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\oxyn\Desktop\dev\guardshield-main\dll\x64\Release\AntiDBG.dll</FullPath>
+      <FullPath>C:\Users\oxyn\Desktop\dev\guardshield-main\dll\x64\Debug\AntiDBG.dll</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
