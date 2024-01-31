@@ -60,6 +60,9 @@ module.get_uuid() # -> str
 
 ## Change log
 ```diff
+v1.1.2 ⋮ 01/02/2024
++ false detection fix
+
 v1.1.1 ⋮ 18/07/2023
 + better cheat engine detection added
 + function names changed [ isSandboxed -> check_sandbox, isDebugged -> check_debug ]
