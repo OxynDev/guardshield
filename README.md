@@ -155,7 +155,7 @@ You can use the `Aes` class to encrypt and decrypt your requests using AES encry
 - [x] Add sandboxie detection
 - [x] Add Vm detection
 - [x] Add Better cheat engine detection
-- [ ] Add DLL injection protection
+- [x] Add DLL injection protection
 
       
 ## Tests
