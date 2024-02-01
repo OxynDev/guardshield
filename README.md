@@ -56,10 +56,16 @@ module.crash_pc() # -> None
 # Create pc fingerprint / hwid
 module.get_uuid() # -> str
 
+# Protect injection / hooking
+module.anti_injection() # -> None
+
 ```
 
 ## Change log
 ```diff
+v1.1.3 ⋮ 01/02/2024
++ injection protection
+
 v1.1.2 ⋮ 01/02/2024
 + false detection fix
 
