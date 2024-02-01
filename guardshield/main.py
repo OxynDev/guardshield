@@ -100,6 +100,9 @@ class Security:
                 settings = self.settings
             )
 
+    def anti_injection(self, python_dll: str):
+        self.dll.hookProtect(python_dll.encode('utf-16le'))
+
     def check_vm(self) -> bool:
         if self.dll.IsVm() == 0:
             return False

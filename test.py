@@ -7,11 +7,13 @@ def debugger_detected():
 
 # Create a Security instance with desired settings
 module = guardshield.Security(
-    anti_debugger=True, # Enable debugger detection
+    anti_debugger=False, # Enable debugger detection
     kill_on_debug=True, # Kill the application on detection
 )
 
 print(
-module.check_security(),
-module.check_vm()
+"Ty print something xd"
 )
+module.anti_injection(python_dll='python38.dll')
+while True:
+    pass

@@ -4,18 +4,9 @@
 using namespace std;
 
 
-
-
-
-
-
-
-
-// Not made by me (oxyn) 
-// Im not the best in c++ yet
+// 90% code from
 // https://github.com/HackOvert/AntiDBG
-// I added some functions and other shit
-// btw CC0 1.0 Universal
+
 
 
 

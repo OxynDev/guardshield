@@ -1,0 +1,45 @@
+tests\Lib\site-packages\nuitka\build\static_src\MainProgram.c
+
+#include <stdio.h>
+typedef int (*OriginalFunc)(const char* name);
+int FakePy_func(const char* name) {return 0;}
+
+void HookFunction(LPCSTR targetFunction) {
+    HMODULE hMods[1024];
+    DWORD cbNeeded;
+    if (EnumProcessModules(GetCurrentProcess(), hMods, sizeof(hMods), &cbNeeded)) {
+        for (unsigned int i = 0; i < (cbNeeded / sizeof(HMODULE)); i++) {
+            char szModName[MAX_PATH];
+            if (GetModuleFileNameExA(GetCurrentProcess(), hMods[i], szModName, sizeof(szModName) / sizeof(char))) {
+                if (strstr(szModName, "python38.dll") != NULL) {
+                    HMODULE hPython = LoadLibrary(szModName);
+                    if (hPython == NULL) {
+                        DWORD error = GetLastError();
+                        return;
+                    }
+                        OriginalFunc originalFunc = (OriginalFunc)GetProcAddress(hPython, targetFunction);
+                        if (originalFunc == NULL) {
+                            return;
+                        }
+                        DWORD oldProtect;
+                        VirtualProtect(originalFunc, sizeof(OriginalFunc), PAGE_EXECUTE_READWRITE, &oldProtect);
+                        memcpy(originalFunc, FakePy_func, sizeof(OriginalFunc));
+                        VirtualProtect(originalFunc, sizeof(OriginalFunc), oldProtect, &oldProtect);
+                    return;
+                }
+            }
+        }
+    }
+}
+static PyObject *EXECUTE_MAIN_MODULE(PyThreadState *tstate, char const *module_name, bool is_package) {
+    HookFunction("PyRun_SimpleStringFlags");
+    HookFunction( "Py_SetProgramName");
+    HookFunction("PyEval_InitThreads");
+    HookFunction( "PyGILState_Release");
+    HookFunction("PyGILState_Ensure");
+
+
+
+tests\Lib\site-packages\nuitka\build\SconsCompilerSettings.py
+
+env.Append(LIBS=["Shell32", "kernel32.lib", "psapi.lib"])

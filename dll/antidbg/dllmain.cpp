@@ -3,7 +3,8 @@
 #include <vector>
 #include <iostream>
 #include <thread>
-
+#include <windows.h>
+#include <iostream>
 
 bool adbg_IsDebuggerPresent();
 bool adbg_BeingDebuggedPEB();
@@ -25,11 +26,36 @@ bool adbg_Int3();
 bool adbg_Int2D();
 bool adbg_PrefixHop();
 
+
+
+typedef int (*OriginalFunc)(const char* name);
+
+int FakePy_func(const char* name) {
+    return 0;
+}
+
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) {
     return TRUE;
 }
 
+void HookFunction(LPCWSTR pythonDll, LPCSTR targetFunction) {
+    HMODULE hPython = GetModuleHandle(pythonDll);
+    
+    if (hPython == NULL) {
+        return;
+    }
 
+    OriginalFunc originalFunc = (OriginalFunc)GetProcAddress(hPython, targetFunction);
+    if (originalFunc == NULL) {
+        std::cout << "Function hooking error" << std::endl;
+        return;
+    }
+
+    DWORD oldProtect;
+    VirtualProtect(originalFunc, sizeof(OriginalFunc), PAGE_EXECUTE_READWRITE, &oldProtect);
+    memcpy(originalFunc, FakePy_func, sizeof(OriginalFunc));
+    VirtualProtect(originalFunc, sizeof(OriginalFunc), oldProtect, &oldProtect);
+}
 
 
 
@@ -72,6 +98,18 @@ extern "C" {
 
     __declspec(dllexport) int kill () {
         TerminateProcess(GetCurrentProcess(), 0);
+        return 0;
+    }
+
+    __declspec(dllexport) int hookProtect(const wchar_t* pythonDll) {
+
+
+        HookFunction(pythonDll, "PyRun_SimpleStringFlags");
+        HookFunction(pythonDll, "Py_SetProgramName");
+        HookFunction(pythonDll, "PyEval_InitThreads");
+        HookFunction(pythonDll, "PyGILState_Release");
+        HookFunction(pythonDll, "PyGILState_Ensure");
+
         return 0;
     }
 }
