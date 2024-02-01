@@ -81,6 +81,9 @@ v1.0.8 ⋮ 17/07/2023
 + get_uuid (Create pc fingerprint / hwid) function added
 ```
 
+## Better anti injection
+
+https://www.youtube.com/watch?v=AP1rasewaUw&ab_channel=oxyn
 
 ## Secure Compilation and Protection Against Decompilation and Debugging Attacks
 
