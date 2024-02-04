@@ -65,7 +65,7 @@ module.anti_injection() # -> None
 
 ## Change log
 ```diff
-v1.1.4 ⋮ 01/02/2024
+v1.1.4 ⋮ 04/02/2024
 + bug fix
 + pyinject process detection (by name)
 
