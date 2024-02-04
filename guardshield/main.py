@@ -1,6 +1,6 @@
-import os, ctypes, threading, time, io, tempfile, platform, subprocess, hashlib
+import os, ctypes, threading, time, tempfile, platform, subprocess, hashlib
 from .dll_bytes import dll_bytes
-from .core import cheatengine
+from . import cheatengine
 
 timeout = 0.1
 
@@ -101,8 +101,13 @@ class Security:
             )
 
     def anti_injection(self, python_dll: str):
-        self.dll.hookProtect(python_dll.encode('utf-16le'))
-
+        while True:
+            try:
+                self.dll.hookProtect(python_dll.encode('utf-16le'))
+                break
+            except:
+                time.sleep(0.01)
+            
     def check_vm(self) -> bool:
         if self.dll.IsVm() == 0:
             return False

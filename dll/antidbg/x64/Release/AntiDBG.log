@@ -8,7 +8,7 @@
      Creating library C:\Users\oxyn\Desktop\dev\guardshield-main\dll\x64\Release\AntiDBG.lib and object C:\Users\oxyn\Desktop\dev\guardshield-main\dll\x64\Release\AntiDBG.exp
   Generating code
   Previous IPDB not found, fall back to full compilation.
-C:\Users\oxyn\Desktop\dev\guardshield-main\dll\antidbg\functions.cpp(409): warning C4715: 'adbg_NtSetInformationThread': not all control paths return a value
+C:\Users\oxyn\Desktop\dev\guardshield-main\dll\antidbg\functions.cpp(412): warning C4715: 'adbg_NtSetInformationThread': not all control paths return a value
   All 151 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   AntiDBG.vcxproj -> C:\Users\oxyn\Desktop\dev\guardshield-main\dll\x64\Release\AntiDBG.dll

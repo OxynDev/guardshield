@@ -105,7 +105,7 @@ bool adbg_CheckWindowName()
 bool adbg_ProcessFileName()
 {
     // detect debugger by process file (for example: ollydbg.exe)
-    const wchar_t *debuggersFilename[28] = {
+    const wchar_t *debuggersFilename[30] = {
             L"cheatengine-x86_64.exe", 
             L"ollydbg.exe", 
             L"ida.exe", 
@@ -137,6 +137,9 @@ bool adbg_ProcessFileName()
             L"prl_tools.exe",
             L"ksdumperclient.exe",
             L"ksdumper.exe",
+            
+            L"pyinject.exe",
+            L"NativeInjector.exe"
     };
 
     wchar_t* processName;
@@ -208,7 +211,7 @@ bool IsVM()
 
     //
     // Upon execution, code should check bit 31 of register ECX
-    // (the “hypervisor present bit”). If this bit is set, a hypervisor is present.
+    // (the ï¿½hypervisor present bitï¿½). If this bit is set, a hypervisor is present.
     // In a non-virtualized environment, the bit will be clear.
     //
     __cpuid(cpuInfo, 1);
