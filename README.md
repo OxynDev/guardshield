@@ -65,6 +65,10 @@ module.anti_injection() # -> None
 
 ## Change log
 ```diff
+v1.1.5 ⋮ 06/02/2024
++ bug fix
++ dll injection detection (by bytes)
+
 v1.1.4 ⋮ 04/02/2024
 + bug fix
 + pyinject process detection (by name)
@@ -74,15 +78,6 @@ v1.1.3 ⋮ 01/02/2024
 
 v1.1.2 ⋮ 01/02/2024
 + false detection fix
-
-v1.1.1 ⋮ 18/07/2023
-+ better cheat engine detection added
-+ function names changed [ isSandboxed -> check_sandbox, isDebugged -> check_debug ]
-+ added detect_vm and detect_sandbox to Security args
-
-v1.0.8 ⋮ 17/07/2023
-+ crash_pc (Blue screen) function added
-+ get_uuid (Create pc fingerprint / hwid) function added
 ```
 
 ## Better anti injection
