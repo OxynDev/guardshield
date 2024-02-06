@@ -1,6 +1,11 @@
-import os, ctypes, threading, time, tempfile, platform, subprocess, hashlib
 from .dll_bytes import dll_bytes
-from . import cheatengine
+
+import guardshield.untils.cheatengine as cheatengine
+import guardshield.untils.dll_scan as dll_scan
+
+import os, ctypes, threading, time, tempfile, platform, subprocess, hashlib
+from ctypes import wintypes
+import win32api
 
 timeout = 0.1
 
@@ -10,10 +15,10 @@ class AntiDebugger:
     def __init__(self, dll, settings):
         self.settings = settings
         self.dll = dll
-        threading.Thread(target=self.dll_detector).start()
+        threading.Thread(target=self.cpp_detector).start()
         threading.Thread(target=self.file_monitor).start()
 
-    def dll_detector(self) -> None:
+    def cpp_detector(self) -> None:
         while True:
 
             if self.dll.isDebugged() == 0:
@@ -24,7 +29,6 @@ class AntiDebugger:
                     function_check()
                 if self.settings['kill_on_debug'] == True:
                     self.dll.kill()
-                
 
             time.sleep(timeout)
 
@@ -70,15 +74,23 @@ class Security:
         temp_file.close()
         self.dll = ctypes.CDLL(temp_file.name)
         
-        
+        op = wintypes.DWORD(0)
+        baseAddress = ctypes.c_int(win32api.GetModuleHandle(None))
+        ctypes.windll.kernel32.VirtualProtect(
+            ctypes.pointer(baseAddress), 4096, 0x04, ctypes.pointer(op)
+        )
+        ctypes.memset(ctypes.pointer(baseAddress), 4096, ctypes.sizeof(baseAddress))
+
             
     def check_security(self) -> None:
 
         if self.settings['detect_vm'] == True:
             if self.check_vm() == True:
+                
                 function_check = self.settings['on_detection']
-                if function_check != None:
-                    function_check()
+                
+                if function_check != None: function_check()
+                    
                 return {
                     "detected":True, 
                     "description": "vm detected"
@@ -87,8 +99,9 @@ class Security:
         if self.settings['detect_sandbox'] == True:
             if self.check_sandbox() == True:
                 function_check = self.settings['on_detection']
-                if function_check != None:
-                    function_check()
+                
+                if function_check != None: function_check()
+                    
                 return {
                     "detected":True, 
                     "description": "sandbox detected"
@@ -100,6 +113,18 @@ class Security:
                 settings = self.settings
             )
 
+    def monitor_dll_bytes(self):
+        
+        res = dll_scan.check_dll_bytes()
+        if res == True:
+            
+            function_check = self.settings['on_detection']
+            if function_check != None: function_check()
+            if self.settings['kill_on_debug'] == True: self.dll.kill()
+                
+            
+            
+
     def anti_injection(self, python_dll: str):
         while True:
             try:
@@ -107,6 +132,8 @@ class Security:
                 break
             except:
                 time.sleep(0.01)
+                
+        threading.Thread(target=self.monitor_dll_bytes).start()
             
     def check_vm(self) -> bool:
         if self.dll.IsVm() == 0:
@@ -124,7 +151,6 @@ class Security:
             return False
         else:
             return True
-
 
     def check_sandbox(self) -> bool:
         if self.dll.isSandbox() == 0:
