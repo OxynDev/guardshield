@@ -2,4 +2,4 @@
 __version__ = '1.0.0'
 
 from guardshield.main import Security
-import guardshield.untils.cheatengine
+import guardshield.utils.cheatengine

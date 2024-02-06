@@ -1,7 +1,7 @@
 from .dll_bytes import dll_bytes
 
-import guardshield.untils.cheatengine as cheatengine
-import guardshield.untils.dll_scan as dll_scan
+import guardshield.utils.cheatengine as cheatengine
+import guardshield.utils.dll_scan as dll_scan
 
 import os, ctypes, threading, time, tempfile, platform, subprocess, hashlib
 from ctypes import wintypes
